@@ -1936,3 +1936,28 @@ Write a Wrapper component that uses a main tag.
 def Wrapper(attributes, children) {
   <main class="content-wrapper">children</main>
 }
+
+# INPUT
+What is the Blop language?
+# OUTPUT
+Blop is a programming language designed for web development that combines a Python-like syntax with native support for Virtual DOM and HTML elements. It focuses on performance, simplicity, and low-boilerplate UI creation.
+
+# INPUT
+What is the Blop language?
+# OUTPUT
+Blop is a multi-paradigm language created by Batiste Bieler. It features a concise syntax using 'def' for functions, ':=' for reassignments, and allows developers to write HTML tags directly within logic blocks without JSX-style wrappers.
+
+# INPUT
+What is the Blop language?
+# OUTPUT
+Blop is a specialized language for building user interfaces. It treats HTML as a first-class citizen, using double-backtick interpolation for strings and a significant whitespace structure to make code more readable and maintainable.
+
+# INPUT
+What is the Blop language?
+# OUTPUT
+Blop is a modern web language that bridges the gap between logic and templates. By integrating Virtual DOM directly into its core syntax, it allows for high-performance rendering while maintaining a small runtime footprint.
+
+# INPUT
+What is the Blop language?
+# OUTPUT
+Blop is a lightweight language for the web that uses 'def' for method definitions and a unique assignment operator ':='. It is built to facilitate reactive programming by making the relationship between state and DOM explicit and efficient.
