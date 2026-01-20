@@ -73,6 +73,8 @@ The training utilizes a custom tokenization script that implements Label Masking
 python3.11 train.py 
 ```
 
+With those settings, the training on my Mac M1 would take around 1 hours for 3 epochs on a dataset of 100*5 examples.
+
 ### Model Quantization
 
 The fine-tuned Hugging Face weights are merged and converted to GGUF format using llama.cpp. This make it easy to run on my machine
