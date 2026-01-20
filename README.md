@@ -65,7 +65,7 @@ Raw Blop syntax examples are parsed and injected into the Gemma Chat Template fo
 python3.11 parse.py
 ```
 
-### Supervised Fine-Tuning (SFT)
+### 2. Supervised Fine-Tuning (SFT)
 
 The training utilizes a custom tokenization script that implements Label Masking. By setting the user's prompt tokens to -100, the model's loss is calculated exclusively on the Blop output and the EOS (End of Sequence) signal. This is critical for knowledge-base applications, as it prevents the model from wasting capacity on memorizing the questions and focuses strictly on the accuracy of the specialized answers.
 
@@ -85,7 +85,7 @@ git clone https://github.com/ggerganov/llama.cpp
 python3.11 ~/projects/llama.cpp/convert_hf_to_gguf.py ./gemma-merged --outfile gemma-blop.gguf
 ```
 
-### Local Deployment
+### 4. Local Deployment and tests
 
 The final model is served via Ollama using a custom Modelfile. This file configures the temperature, repeat penalty, and stop sequences necessary to maintain syntax stability and prevent generation loops.
 
