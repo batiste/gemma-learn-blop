@@ -3,7 +3,7 @@ FROM ./gemma-blop.gguf
 PARAMETER temperature 0.3
 PARAMETER top_p 0.9
 PARAMETER stop "<end_of_turn>"
-# PARAMETER stop "}\n\n"
+# PARAMETER stop "}\n"
 
 # This forces the model to stay in "Developer Mode"
 SYSTEM "You are a technical documentation assistant for the Blop programming language. Respond only in English and focus on code syntax."

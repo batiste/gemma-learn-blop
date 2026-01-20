@@ -1,4 +1,7 @@
 from pathlib import Path
+from transformers import (
+    AutoTokenizer,
+)
 
 def parse_examples(path: str):
     text = Path(path).read_text(encoding="utf-8")
@@ -42,15 +45,14 @@ def parse_examples(path: str):
 
     return examples
 
+model_id = "google/gemma-2b-it"
+tokenizer = AutoTokenizer.from_pretrained(model_id)
 
 def format_example(example):
+    # Add tokenizer.eos_token at the very end
     return {
-        "text": f"""<start_of_turn>user
-{example['input']}
-<end_of_turn>
-<start_of_turn>model
-{example['output']}
-<end_of_turn>"""
+        "text": f"<start_of_turn>user\n{example['input']}\n<end_of_turn>\n"
+                f"<start_of_turn>model\n{example['output']}\n<end_of_turn>{tokenizer.eos_token}"
     }
 
 

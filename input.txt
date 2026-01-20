@@ -1,10 +1,10 @@
 # INPUT
 
-Write me a function in the Blop language that output the content in a div
+Write me a function called block in the Blop language that output the content in a div
 
 # OUTPUT
 
-def div(content) {
+def block(content) {
   <div>
     = content
   </div>
@@ -12,11 +12,11 @@ def div(content) {
 
 # INPUT
 
-Write me a function in the Blop language that output the content in a span
+Write me a function called text in the Blop language that output the content in a span
 
 # OUTPUT
 
-def div(content) {
+def text(content) {
   <span>
     = content
   </span>
@@ -36,21 +36,6 @@ def SomeComponent(attributes, children: array) {
   </div>
 }
 
-
-# INPUT
-
-Write me a Component named SomeComponent in the Blop language output the content passed as an attribute in a div
-
-
-# OUTPUT
-
-def SomeComponent(attributes, children: array) {
-  <div>
-    = attributes.content
-  </div>
-}
-
-
 # INPUT
 
 Write me a Component named OutComponent in the Blop language that output the content attribute in a div
@@ -58,7 +43,7 @@ Write me a Component named OutComponent in the Blop language that output the con
 
 # OUTPUT
 
-def SomeComponent(attributes, children: array) {
+def OutComponent(attributes, children: array) {
   <div>
     = attributes.content
   </div>
@@ -905,7 +890,7 @@ class Toggle extends Component {
 
   def render() {
     <button on={ click: () => this.toggle() }>
-      if this.active { "ON" } else { "OFF" }
+      if this.active "ON" else "OFF"
     </button>
   }
 }
@@ -1192,7 +1177,7 @@ Create a Blop table body from a rows array.
 # OUTPUT
 def TableBody(attributes) {
   <tbody>
-    for row in attributes.rows: array {
+    for row in attributes.rows {
       <tr>
         <td>row.name</td>
         <td>row.status</td>
@@ -1207,7 +1192,7 @@ Write a Blop function that iterates over notifications.
 # OUTPUT
 def Notifications(attributes) {
   <div class="alerts">
-    for note in attributes.list: array {
+    for note in attributes.list {
       <div class="note">note.text</div>
     }
   </div>
@@ -1234,7 +1219,7 @@ Loop through a set of features and display them in Blop.
 # OUTPUT
 def FeatureGrid(attributes) {
   <div class="grid">
-    for feature in attributes.features: array {
+    for feature in attributes.features {
       <div class="card">feature.name</div>
     }
   </div>
@@ -1246,7 +1231,7 @@ Write a Blop loop that renders buttons for a pagination group.
 # OUTPUT
 def PageButtons(attributes) {
   <div>
-    for page in attributes.pages: array {
+    for page in attributes.pages {
       <button>page.number</button>
     }
   </div>
@@ -1263,3 +1248,252 @@ def TagList(attributes) {
     }
   </nav>
 }
+
+# INPUT
+In the Blop language, how do I define a variable and then re-assign it to a new value later?
+
+# OUTPUT
+count = 0
+count := 10
+
+# INPUT
+Write a Blop function named AuthStatus that displays a login button if the user is not logged in, otherwise displays a "Welcome" message.
+
+# OUTPUT
+def AuthStatus(attributes: object) {
+  if attributes.loggedIn {
+    <div>"Welcome back!"</div>
+  } else {
+    <button on={ click: attributes.login }>
+      "Sign in"
+    </button>
+  }
+}
+
+# INPUT
+Create a Blop loop that renders an unordered list of "items" from an array passed in attributes.
+
+# OUTPUT
+def ItemList(attributes: object) {
+  <ul>
+    for item in attributes.items {
+      <li>= item</li>
+    }
+  </ul>
+}
+
+# INPUT
+Create a Blop component that calculates a total price (price * quantity) and displays it inside a span using the value operator.
+
+# OUTPUT
+def PriceDisplay(attr: object) {
+  total = attr.price * attr.quantity
+  <span>
+    "Total: "
+    = total
+  </span>
+}
+
+# INPUT
+Write a Blop input element that has a 'form-control' class, a placeholder, and an on-change event handler.
+
+# OUTPUT
+<input 
+  class="form-control" 
+  placeholder="Enter name..." 
+  on={ change: (e) => console.log(e.target.value) } 
+/>
+
+# INPUT
+Write a Blop component that destructures 'name' and 'age' from the attributes object to display them in a div.
+
+# OUTPUT
+def UserProfile(attributes: object) {
+  { name, age } = attributes
+  <div>
+    <strong>= name</strong>
+    <span>= age</span>
+  </div>
+}
+
+# INPUT
+How do you render two sibling elements (h1 and p) in Blop without using a wrapping parent div?
+
+# OUTPUT
+def Content() {
+  <>
+    <h1>"Title"</h1>
+    <p>"Content body"</p>
+  </>
+}
+
+# INPUT
+Show how to apply a 'selected' class to a div in Blop only if the 'isSelected' variable is true, while keeping 'list-item' as a constant class.
+
+# OUTPUT
+<div class={ selected: isSelected, 'list-item': true }>
+  "Click me"
+</div>
+
+# INPUT
+Render a list in Blop where each item displays its index number followed by its name.
+
+# OUTPUT
+for item, index in items {
+  <div>
+    = index + 1
+    ": "
+    = item.name
+  </div>
+}
+
+# INPUT
+Create a div in Blop that uses an 'insert' hook to log "Hello" to the console when it is added to the DOM.
+
+# OUTPUT
+<div hooks={ insert: () => console.log("Hello") }>
+  "I am mounted"
+</div>
+
+# INPUT
+Write a Blop function that renders a checkbox and its label.
+
+# OUTPUT
+def Checkbox(attributes: object) {
+  <label>
+    <input type="checkbox" checked=attributes.checked />
+    = attributes.label
+  </label>
+}
+
+# INPUT
+How do you write a for loop in Blop that iterates over an array with a specific key for performance?
+
+# OUTPUT
+<ul>
+  for user in users: user.id {
+    <li>= user.name</li>
+  }
+</ul>
+
+# INPUT
+How do I pass a children array to a parent component in Blop and render them inside a main element?
+
+# OUTPUT
+def Layout(attributes: object, children: array) {
+  <main class="container">
+    for child in children {
+      = child
+    }
+  </main>
+}
+
+# INPUT
+Write a Blop component that uses a local variable to toggle a "hidden" class based on a button click event.
+
+# OUTPUT
+def ToggleBox(attributes: object) {
+  show = false
+  <div>
+    <button on={ click: () => show := !show }>
+      "Toggle"
+    </button>
+    <div class={ hidden: !show }>
+      "Peek-a-boo!"
+    </div>
+  </div>
+}
+
+# INPUT
+Create a Blop function that maps over an object's keys and values to render a description list (dl).
+
+# OUTPUT
+def DataList(attributes: object) {
+  <dl>
+    for value, key in attributes.data {
+      <dt>= key</dt>
+      <dd>= value</dd>
+    }
+  </dl>
+}
+
+# INPUT
+Write a Blop component for a "Todo Item" that calls a 'remove' function passed via attributes when a delete button is clicked.
+
+# OUTPUT
+def TodoItem(attributes: object) {
+  { task, remove } = attributes
+  <li>
+    <span>= task.text</span>
+    <button on={ click: () => remove(task.id) }>
+      "Delete"
+    </button>
+  </li>
+}
+
+# INPUT
+How do you render a raw HTML string in Blop safely?
+
+# OUTPUT
+def RawViewer(attributes: object) {
+  <div innerHTML=attributes.htmlContent></div>
+}
+
+# INPUT
+Write a nested Blop structure where a 'Header' component and a 'Footer' component wrap a custom 'Body' content.
+
+# OUTPUT
+def Page(attributes: object) {
+  <>
+    <Header title="My App" />
+    <section class="content">
+      <Body text=attributes.text />
+    </section>
+    <Footer />
+  </>
+}
+
+# INPUT
+Create a Blop loop that renders 5 stars, where each star has a 'filled' class if its index is less than the 'rating' attribute.
+
+# OUTPUT
+def Rating(attributes: object) {
+  <div>
+    for i in [0, 1, 2, 3, 4] {
+      <span class={ star: true, filled: i < attributes.rating }>
+        "★"
+      </span>
+    }
+  </div>
+}
+
+# INPUT
+How do you handle a form submission in Blop to prevent the default page reload?
+
+# OUTPUT
+def SimpleForm(attributes: object) {
+  <form on={ submit: (e) => e.preventDefault() }>
+    <input type="text" />
+    <button type="submit">"Submit"</button>
+  </form>
+}
+
+# INPUT
+Write a Blop function that renders an image but provides a fallback placeholder div if the 'src' attribute is missing.
+
+# OUTPUT
+def SmartImage(attributes: object) {
+  if attributes.src {
+    <img src=attributes.src alt=attributes.alt />
+  } else {
+    <div class="placeholder">"No Image Available"</div>
+  }
+}
+
+# INPUT
+In Blop, how do you add multiple lifecycle hooks like 'insert' and 'destroy' to a single element?
+
+# OUTPUT
+<div hooks={ insert: (vnode) => console.log('Added', vnode), destroy: () => console.log('Removed')}>
+  "Monitor me"
+</div>

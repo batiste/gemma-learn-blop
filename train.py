@@ -8,6 +8,28 @@ from transformers import (
 )
 from peft import LoraConfig, get_peft_model
 
+dataset = load_dataset("json", data_files="train.jsonl")
+batch = dataset["train"][0]
+print(batch.keys())
+
+def tokenize(batch):
+    tokens = tokenizer(
+        batch["text"],
+        truncation=True,
+        padding="max_length",
+        max_length=512,
+        # return_tensors="pt" is handled by the trainer, keep as list
+    )
+
+    # Use -100 for the pad tokens so the loss function ignores them
+    # Ensure we aren't shifting them manually—the Trainer handles the 1-token shift internally
+    tokens["labels"] = [
+        [(t if t != tokenizer.pad_token_id else -100) for t in seq]
+        for seq in tokens["input_ids"]
+    ]
+    
+    return tokens
+
 model_id = "google/gemma-2b-it"
 
 tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -28,37 +50,36 @@ lora_config = LoraConfig(
 
 model = get_peft_model(model, lora_config)
 
-dataset = load_dataset("json", data_files="train.jsonl")
-batch = dataset["train"][0]
-print(batch.keys())
-
-def tokenize(batch):
-    tokens = tokenizer(
-        batch["text"],
-        truncation=True,
-        padding="max_length",
-        max_length=512,
-    )
-
-    labels = tokens["input_ids"].copy()
-    labels = [
-        [-100 if token == tokenizer.pad_token_id else token for token in seq]
-        for seq in labels
-    ]
-    tokens["labels"] = labels
-    return tokens
-
 dataset = dataset.map(tokenize, batched=True, remove_columns=["text"])
+
+
+# 1. Grab the first processed example
+example = dataset['train'][0]
+
+# 2. Decode the Input (The full text)
+full_input = tokenizer.decode(example["input_ids"])
+
+# 3. Decode the Labels (The part the model is actually learning)
+# We replace -100 with the pad_token_id just so the tokenizer can decode it
+label_ids = [t if t != -100 else tokenizer.pad_token_id for t in example["labels"]]
+learned_text = tokenizer.decode([t for t in label_ids if t != tokenizer.pad_token_id])
+
+print("--- FULL INPUT ---")
+print(full_input)
+print("\n--- WHAT THE MODEL IS LEARNING ---")
+print(learned_text)
+
 
 args = TrainingArguments(
     output_dir="./gemma-blop",
-    per_device_train_batch_size=1,   # Back to 1 to ensure stability
-    gradient_accumulation_steps=8,  # Total batch 8
-    num_train_epochs=3,             # 3 is the perfect number of passes
-    learning_rate=8e-5,             # THE SWEET SPOT: Higher than 3e-5, lower than 1e-4
-    lr_scheduler_type="linear",     # Linear is more aggressive than cosine for small datasets
-    warmup_steps=50,                # Give it a steady start
-    logging_steps=5,
+    per_device_train_batch_size=1,
+    gradient_accumulation_steps=8,
+    num_train_epochs=5,              # Increased slightly since dataset is tiny
+    learning_rate=5e-5,              # Dropped from 8e-5 to prevent "breaking" the model
+    lr_scheduler_type="cosine",      # Cosine is often smoother for preventing late-stage jitter
+    warmup_ratio=0.1,                # Using ratio instead of fixed steps for small data
+    weight_decay=0.01,               # Helps prevent the "looping" overfitting
+    logging_steps=1,
     fp16=True,
     report_to="none",
 )
