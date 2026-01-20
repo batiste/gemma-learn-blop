@@ -1938,12 +1938,12 @@ def Wrapper(attributes, children) {
 }
 
 # INPUT
-What is the Blop language?
+What is Blop?
 # OUTPUT
 Blop is a programming language designed for web development that combines a Python-like syntax with native support for Virtual DOM and HTML elements. It focuses on performance, simplicity, and low-boilerplate UI creation.
 
 # INPUT
-What is the Blop language?
+Explain the Blop language?
 # OUTPUT
 Blop is a multi-paradigm language created by Batiste Bieler. It features a concise syntax using 'def' for functions, ':=' for reassignments, and allows developers to write HTML tags directly within logic blocks without JSX-style wrappers.
 
