@@ -8,12 +8,15 @@ While this repository focuses on a programming language, the methodology represe
 
 The training objective was to teach the model what Blop was and to achieve some simple code generation while minimizing "pre-training interference"—where the model reverts to standard JavaScript or Python patterns. By isolating the Blop syntax during training, the model learns to prioritize specialized rules over its general-purpose knowledge.
 
-The question I wanted answered was:
+The question I wanted answered was by Gemma:
 
->>> What is Blop?
+> What is Blop?
 
->>> Generate me a Blop Component that displays a list of users
+"Blop" is a fascinating and unusual phenomenon in the ocean, and it's still not entirely understood by scientists! Here's a breakdown of what we know about it
 
+> Generate me a Blop Component that displays a list of users
+
+Okay, here's a BlopComponent in React that displays a list of users. I'll provide a basic, functional implementation. I'll include explanations and considerations for improving it, especially for handling data fetching, loading states, and error handling.
 
 ### Key Blop Syntax Features
 
