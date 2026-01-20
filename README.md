@@ -141,15 +141,17 @@ Zapraszamy
 As you can see, the model is now able to generate valid Blop syntax based on the training examples provided.
 However, it seems to add a "Zapraszamy" at the end of the output. That single word is a classic "post-generation hallucination" common in small models like Gemma 2B.
 
-It is important to note that I didn't get perfect results right away. I had to experiment with different training parameters, and inference settings to achieve satisfactory performance. And it is far from perfect, but it is a good first draft that can be further refined with more data and training.
+It is important to note that I didn't get perfect results right away. I had to create more example, experiment with different training parameters and inference settings to achieve satisfactory performance. And it is far from perfect, but it is a good first draft that can be further refined with more data and training.
 
 
 ## What did I learn?
 
-This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases. 
+This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases.
 
-Teaching a small model a custom syntax is a battle against its own "common sense." Initially, Gemma 2B-IT refused to speak Blop. It defaulted to Vue-style curly braces or React, hallucinated JavaScript keywords, and often devolved into "repetitive rambling" (like the infamous *repugn* artifact) because it didn't know when to stop.
+Teaching a small model a custom syntax is a battle against its own "common sense." Initially, Gemma 2B-IT refused to speak Blop. It defaulted to Vue-style curly braces or React, hallucinated JavaScript keywords, and often devolved into "repetitive rambling" (like the infamous repugn artifact) because it didn't know when to stop.
 
-By isolating the Blop syntax during training and focusing the loss calculation on the output only, the model learned to prioritize specialized rules over its general-purpose knowledge. This approach can be generalized to other domains where injecting specialized knowledge into a lightweight model is desired.
+By isolating the Blop syntax during training and focusing the loss calculation strictly on the output, the model learned to prioritize specialized rules over its general-purpose knowledge. This approach is highly generalizable to other domains where injecting proprietary knowledge into a lightweight, local model is required.
 
-I am still learning all the different nuances and parameters that can be given to the training and inference process to get the best results. But I hope this project serves as a useful reference for others looking to adapt small LLMs to their own specialized tasks.
+The quantity and quality of training data proved crucial. I found that the more diverse and representative the examples, the better the model generalized the Blop syntax rules. It wasn't just about the code; the model had to be explicitly taught the "boundary" of where a response ends to prevent hallucinations.
+
+I am still exploring the nuances of hyperparameters and inference settings to reach peak stability. I hope this project serves as a useful reference for others looking to adapt small LLMs to their own specialized tasks.
