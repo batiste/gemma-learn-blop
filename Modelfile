@@ -1,0 +1,15 @@
+FROM ./gemma-blop.gguf
+
+PARAMETER temperature 0.3
+PARAMETER top_p 0.9
+PARAMETER stop "<end_of_turn>"
+# PARAMETER stop "}\n\n"
+
+# This forces the model to stay in "Developer Mode"
+SYSTEM "You are a technical documentation assistant for the Blop programming language. Respond only in English and focus on code syntax."
+
+# Ensure the template matches your training
+TEMPLATE """<start_of_turn>user
+{{ .Prompt }}<end_of_turn>
+<start_of_turn>model
+"""

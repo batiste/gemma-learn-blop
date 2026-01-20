@@ -1,0 +1,1265 @@
+# INPUT
+
+Write me a function in the Blop language that output the content in a div
+
+# OUTPUT
+
+def div(content) {
+  <div>
+    = content
+  </div>
+}
+
+# INPUT
+
+Write me a function in the Blop language that output the content in a span
+
+# OUTPUT
+
+def div(content) {
+  <span>
+    = content
+  </span>
+}
+
+
+# INPUT
+
+Write me a Component named SomeComponent in the Blop language that wraps its children into a div
+
+
+# OUTPUT
+
+def SomeComponent(attributes, children: array) {
+  <div>
+    = children
+  </div>
+}
+
+
+# INPUT
+
+Write me a Component named SomeComponent in the Blop language output the content passed as an attribute in a div
+
+
+# OUTPUT
+
+def SomeComponent(attributes, children: array) {
+  <div>
+    = attributes.content
+  </div>
+}
+
+
+# INPUT
+
+Write me a Component named OutComponent in the Blop language that output the content attribute in a div
+
+
+# OUTPUT
+
+def SomeComponent(attributes, children: array) {
+  <div>
+    = attributes.content
+  </div>
+}
+
+
+# INPUT
+
+Write me a Component named TodoListItem in the Blop language. This component creates a li HTML
+element that can either input or reflect the value depending if you are in edit mode or not.
+The edit mode, the values and events hooks are all passed as attributes.
+
+# OUTPUT
+
+TodoListItem = (attributes: object, _children: array): VNode => {
+  { value,
+    changeItem as change,
+    removeItem,
+    editItem,
+    editMode
+  } = attributes
+
+
+  hooks = {
+    insert: (vnode) => {
+      vnode.elm.focus()
+      vnode.elm.select()
+    }
+  }
+
+  <li style={ marginBottom: '5px' }>
+    <div class="form-row">
+      <div class="col">
+        if editMode {
+          <input hooks class="form-control" type="text" value on={ change } />
+        } else {
+          <div on={ click: editItem } style={ padding: '10px' }>
+            = value
+          </div>
+        }
+      </div>
+      <div class="col">
+        <button class="btn btn-secondary" on={ click: removeItem }>'delete'</button>
+      </div>
+    </div>
+  </li>
+}
+
+
+# INPUT
+
+Give me a Blop Component named AutoFocusInput, that generate an HTML input that gain
+focus as it is inserted into the page.
+
+# OUTPUT
+
+AutoFocusInput = (state) => {
+  hooks = { insert: (vnode) => vnode.elm.focus() }
+  <input
+    hooks
+    type="text"
+    value=state.value
+    class="form-control"
+    on=state.on
+    autofocus=true
+    style={ fontSize: '16px', padding: '0.5em' } />
+}
+
+
+# INPUT
+
+Generate a Blop component that is a "Page" (top component) that get a new dog breed via the imported function
+getNewDog on mount, and that display the currently selected dog in the state using the import DogGame component.
+
+
+# OUTPUT
+
+import { DogGame } from './DogBreedGame.blop'
+import { getNewDog } from './services.blop'
+
+def DogPage(attributes, _children, node) {
+  { state } = attributes
+  node.mount(async () => {
+    if (!state.dogPage.choice) {
+      await getNewDog(state)
+    }
+  })
+
+  <DogGame page=state.dogPage state=state loading=state.loading>
+    = 'Dog breed game'
+  </DogGame>
+}
+
+
+# INPUT
+
+What is the Blop language?
+
+# OUTPUT
+
+The Blop language by Batiste Bieler is a web-focused programming language that generates Virtual DOM trees with an HTML-like syntax, compiling to ES6 JavaScript, allowing full language features (statements, expressions, HTML) within functions to build dynamic web interfaces, relying on snabbdom and offering a component system, distinct from JSX by its flexibility and native VDOM integration. 
+
+
+# INPUT
+
+Generate a Blop component named MemeCard, which is a card using bootstrap that takes an img url and a name as a parameter
+
+# OUTPUT
+
+def MemeCard(attributes) {
+  { meme } = attributes
+  <div class="card mb-4 shadow-sm" style={ minWidth: '200px' }>
+    <div class="card-header">
+      <h4 class="my-0 font-weight-normal">meme.name</h4>
+    </div>
+    <div class="card-body">
+      <img
+        src=meme.url
+        style={ width: '100%' } />
+    </div>
+  </div>
+}
+
+
+# INPUT
+
+Write me a Index component in the Blop language that receive a state as an argument
+and that display 3 different pages depending on this state (DogPage, MemePage, PetStore)
+
+# OUTPUT
+
+import { MemePage } from './MemePage/MemePage.blop'
+import { DogPage } from './DogPage/DogPage.blop'
+import { PetStore } from './PetStore/index.blop'
+
+Index = (state) => {
+  <div>
+    <div class='container'>
+      <h1>
+        <b>state.page</b>
+      </h1>
+      if state.page == 'dog' {
+        <DogPage state=state></DogPage>
+      } elseif state.page == 'meme' {
+        <MemePage state=state></MemePage>
+      } else {
+        <PetStore todo=state></PetStore>
+      }
+    </div>
+  </div>
+}
+
+# INPUT
+
+Write me an unpacking assignment in Blop into variable h and j from an object of type { h: 3, j: 10 }
+
+# OUTPUT
+
+{ h, j } = { h: 3, j: 10 }
+
+
+# INPUT
+
+Write me an unpacking assignment in Blop into variable h and j from an object of type { h: 3, j: 10 }
+
+# OUTPUT
+
+{ h, j } = { h: 3, j: 10 }
+
+
+# INPUT
+
+Write my a for loop in Blop that ouput the number [1, 10, 100] in the console
+
+# OUTPUT
+
+for value in [1, 10, 100]: array {
+  console.log(value)
+}
+
+# INPUT
+
+In the Blop language, re-assign a variable "hello" value from 1 to 2
+
+# OUTPUT
+
+hello = 1
+hello := 2
+
+# INPUT
+
+In the Blop language, how do you reassign a variable from the outer scope of a function?
+
+# OUTPUT
+
+hello = 1
+
+def reassign() {
+    hello := 1
+}
+
+# INPUT
+
+In Blop, write me a infinite loop that write 1 on the console
+
+# OUTPUT
+
+while true {
+  console.log(1)
+}
+
+# INPUT
+
+In Blop write me a function "loop1" that takes an array and output every item
+in the array as an HTML node withing a div
+
+# OUTPUT
+
+def loop1(array) {
+  <div>
+    for item in array: array {
+      = item
+    }
+  </div>
+}
+
+# INPUT
+
+In the Blop language, write me a Component named TestLifecycle that do something when the component is mounted
+and display the "value" key of the attributes in a span.
+
+
+# OUTPUT
+
+def TestLifecycle(attributes, _children, node) {
+  node.mount(() => {
+    // do something
+  })
+  <span>attributes.value</span>
+}
+
+# INPUT
+
+In the Blop language, how can I use a ternary operator withing a HTML generating function
+
+# OUTPUT
+
+def ternaryExpressionInVirtualNode(c) {
+  <div>
+    = if c > 10 => <p>'c is > 10'</p> else <p>'c is small'</p>
+  </div>
+}
+
+# INPUT
+
+In the Blop language, write me a function that fetches the API https://api.com/get-dog 
+and return the JSON content, handling loading through "state.loading"
+
+# OUTPUT
+
+async def getNewDog(state) {
+  state.loading = true
+  try {
+    response = await fetch(`https://api.com/get-dog`)
+  } catch e {
+    console.log(e)
+    state.loading = e.message
+    return
+  }
+  message = (await response.json()).message
+  state.loading = false
+
+  state.dogPage.choice = { data: message }
+}
+
+# INPUT
+
+Using the Blop language state library, create an initial Proxy state object with a todolist with 3 items
+
+# OUTPUT
+
+import create from './lib/state.blop'
+
+state: object = {
+  todoList: [
+    'Buy some milk',
+    'Take out the trash',
+    'Recycle'
+  ],
+}
+
+def createState(initialState) {
+  return create(initialState || state)
+}
+
+# INPUT
+
+In the Blop language, create a MemePage component page, that loads memes with the "getMemes" service
+and display a list of those memes using the "MemeCard" component. Use bootstrap for CSS.
+
+# OUTPUT
+
+import { MemeCard } from './MemeCard.blop'
+import { getMemes } from './services.blop'
+
+def MemePage(attributes: object, _children, node) {
+  { state } = attributes
+  node.mount(async () => {
+    console.log('mount MemePage')
+    await getMemes(state)
+  })
+  <div>
+    <div class={ "card-deck": true, "mb-3": true, 'text-center': true }>
+      for meme in state.memes: array {
+        <MemeCard meme></MemeCard>
+      }
+    </div>
+  </div>
+}
+
+# INPUT
+Write a function in the Blop language that renders a list of items as an unordered list.
+
+# OUTPUT
+def ItemList(attributes: object) {
+  <ul>
+    for item in attributes.items: array {
+      <li>item.name</li>
+    }
+  </ul>
+}
+
+# INPUT
+Write a function in the Blop language for a conditional notification alert.
+
+# OUTPUT
+def Notification(attributes: object) {
+  if attributes.isVisible {
+    <div class="alert">
+      = attributes.message
+    </div>
+  }
+}
+
+# INPUT
+Write a Blop function that takes a 'user' object and displays their profile with an image.
+
+# OUTPUT
+def UserProfile(attributes: object) {
+  user = attributes.user
+  <div class="profile-card">
+    <img src=user.avatarUrl />
+    <h3>user.name</h3>
+    <p>user.bio</p>
+  </div>
+}
+
+# INPUT
+Write a function in Blop that renders a button that runs a 'onClick' handler from attributes.
+
+# OUTPUT
+def ActionButton(attributes: object) {
+  <button onclick=attributes.onClick>
+    = attributes.label
+  </button>
+}
+
+# INPUT
+Write a Blop function to render a table of products.
+
+# OUTPUT
+def ProductTable(attributes: object) {
+  <table>
+    <thead>
+      <tr>
+        <th>"Name"</th>
+        <th>"Price"</th>
+      </tr>
+    </thead>
+    <tbody>
+      for product in attributes.products: array {
+        <tr>
+          <td>product.name</td>
+          <td>product.price</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+# INPUT
+Write a function in Blop that displays a loading spinner if 'state.loading' is true, else shows content.
+
+# OUTPUT
+def ContentLoader(attributes: object) {
+  state = attributes.state
+  <div>
+    if state.loading {
+      <div class="spinner"></div>
+    } else {
+      <section>attributes.children</section>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop function for a navigation menu using an array of links.
+
+# OUTPUT
+def Navbar(attributes: object) {
+  <nav>
+    for link in attributes.links: array {
+      <a href=link.url>link.text</a>
+    }
+  </nav>
+}
+
+# INPUT
+Write a function in Blop that uses 'node.mount' to fetch data on load.
+
+# OUTPUT
+def DataComponent(attributes: object, _children, node) {
+  state = attributes.state
+  node.mount(async () => {
+    state.data = await fetchData()
+  })
+  <div>
+    if state.data {
+      <p> = state.data.content </p>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop component that renders a form with an input and a submit button.
+
+# OUTPUT
+def SearchForm(attributes: object) {
+  <form onsubmit=attributes.handleSubmit>
+    <input type="text" placeholder="Search..." oninput=attributes.handleInput />
+    <button type="submit">"Go"</button>
+  </form>
+}
+
+# INPUT
+Write a Blop component for a footer with a copyright year variable.
+
+# OUTPUT
+def Footer(attributes: object) {
+  <footer>
+    <p>"© "attributes.year" Batiste Bieler"</p>
+  </footer>
+}
+
+# INPUT
+Write a function in Blop that displays a "Active" badge if 'status' is 1.
+
+# OUTPUT
+def StatusBadge(attributes: object) {
+  <span class="badge">
+    if attributes.status == 1 {
+      "Active"
+    } else {
+      "Inactive"
+    }
+  </span>
+}
+
+# INPUT
+Write a Blop component that generates a nested <div> structure for a layout container.
+
+# OUTPUT
+def Layout(attributes: object) {
+  <div class="main-container">
+    <header>attributes.header</header>
+    <main>attributes.children</main>
+  </div>
+}
+
+# INPUT
+Write a component in Blop that displays a list of tags as spans.
+
+# OUTPUT
+def TagCloud(attributes: object) {
+  <div class="tags">
+    for tag in attributes.tags: array {
+      <span class="tag">tag</span>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop function that creates an image gallery from an array of URLs.
+
+# OUTPUT
+def Gallery(attributes: object) {
+  <div class="gallery">
+    for url in attributes.urls: array {
+      <img src=url class="thumb" />
+    }
+  </div>
+}
+
+# INPUT
+Write a function in Blop that renders a 'Logout' button with a specific class.
+
+# OUTPUT
+def LogoutButton(attributes: object) {
+  <button class="btn-danger" onclick=attributes.onLogout>
+    "Logout"
+  </button>
+}
+
+# INPUT
+Write a Blop function that conditionally applies a CSS class using an object.
+
+# OUTPUT
+def DynamicBox(attributes: object) {
+  <div class={ "box": true, "highlighted": attributes.isActive }>
+    "Interactive Element"
+  </div>
+}
+
+# INPUT
+Write a function in Blop that handles an async delete action.
+
+# OUTPUT
+async def deleteItem(id, state) {
+  await fetch(`/api/delete/${id}`, { method: 'DELETE' })
+  state.refresh()
+}
+
+# INPUT
+Write a Blop function that renders a 'Welcome' message using string interpolation.
+
+# OUTPUT
+def WelcomeMessage(attributes: object) {
+  <h1>'Welcome back, 'attributes.username''</h1>
+}
+
+# INPUT
+Write a function in Blop that renders a checkbox and its label.
+
+# OUTPUT
+def Checkbox(attributes: object) {
+  <label>
+    <input type="checkbox" checked=attributes.checked />
+    = attributes.label
+  </label>
+}
+
+# INPUT
+Write a Blop function for a simple modal with a close button.
+
+# OUTPUT
+def Modal(attributes: object) {
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <button onclick=attributes.onClose> "X" </button>
+      = attributes.children
+    </div>
+  </div>
+}
+
+# INPUT
+Show me a complex stateful component in Blop that fetches and displays a list of pets.
+
+# OUTPUT
+import { fetchPets } from './api.blop'
+
+def PetList(attributes: object, _children, node) {
+  state = attributes.state
+  
+  # Lifecycle hook to trigger async data loading
+  node.mount(async () => {
+    state.loading = true
+    try {
+      state.pets = await fetchPets()
+    } catch e {
+      state.error = "Failed to load pets"
+    }
+    state.loading = false
+  })
+
+  <div class="pet-container">
+    if state.loading {
+      <p> "Loading pets..." </p>
+    } else if state.error {
+      <p class="error">state.error </p>
+    } else {
+      <ul class="pet-grid">
+        for pet in state.pets: array {
+          <li class="pet-card">
+            <img src=pet.photo />
+            <h3>pet.name </h3>
+            <button onclick={() => deletePet(pet.id)}> "Remove" </button>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+}
+
+# INPUT
+Write a stateful counter in Blop using scoped SCSS classes and an event object.
+
+# OUTPUT
+import './counter.scss' as classes
+
+def Counter(attributes) {
+  { state } = attributes
+  increment = (e) => {
+    e.preventDefault()
+    state.count += 1
+  }
+  <div class=classes.wrapper>
+    <p>'Current count: 'state.count''</p>
+    <button class="btn btn-primary" on={ click: increment }>'Add'</button>
+  </div>
+}
+
+# INPUT
+Write a Blop component that uses node.mount and node.unmount to manage a ResizeObserver.
+
+# OUTPUT
+def ResizeManager(attributes, _children, node) {
+  { state } = attributes
+  observer = new ResizeObserver(entries => {
+    state.width = entries[0].contentRect.width
+  })
+  node.mount(() => {
+    observer.observe(document.body)
+  })
+  node.unmount(() => {
+    observer.disconnect()
+  })
+  <div class="info">
+    'Window width is: 'state.width'px'
+  </div>
+}
+
+# INPUT
+Write a Blop function that renders an image only if the source exists, using the inline arrow logic.
+
+# OUTPUT
+def SmartImage(attributes) {
+  { src } = attributes
+  <figure>
+    = if src && src.length > 0 => <img src style={ maxWidth: '100%' } />
+    <figcaption>'Attached Image'</figcaption>
+  </figure>
+}
+
+# INPUT
+Write a Blop component that handles data fetching with an AbortController.
+
+# OUTPUT
+import { fetchUsers } from './api.blop'
+
+def UserList(attributes, _children, node) {
+  { state } = attributes
+  controller = null
+  node.mount(() => {
+    controller := fetchUsers(state)
+  })
+  node.unmount(() => {
+    if controller => controller.abort()
+  })
+  <ul>
+    for user in state.users: array {
+      <li key=user.id>user.name</li>
+    }
+  </ul>
+}
+
+# INPUT
+Write a Blop function that handles a delete action using a closure for the index.
+
+# OUTPUT
+def DeleteAction(attributes) {
+  { items, index } = attributes
+  removeItem = (i) => (e) => {
+    items.splice(i, 1)
+  }
+  <button class="btn-sm" on={ click: removeItem(index) }>'Remove'</button>
+}
+
+# INPUT
+Write a Blop function for a tab navigation where the active class is set by state.
+
+# OUTPUT
+import './tabs.scss' as classes
+
+def Tabs(attributes) {
+  { state, tabs } = attributes
+  <ul class=classes.tabList>
+    for tab in tabs: array {
+      <li class={ 'active': state.currentTab == tab.id }>
+        <a on={ click: () => state.currentTab = tab.id }>tab.label</a>
+      </li>
+    }
+  </ul>
+}
+
+# INPUT
+Write a Blop function that generates table cells with inline styles for colors.
+
+# OUTPUT
+def ColorGrid(attributes) {
+  { colors } = attributes
+  <tr>
+    for color in colors: array {
+      <td style={ backgroundColor: color, width: '20px', height: '20px' }>
+        ' '
+      </td>
+    }
+  </tr>
+}
+
+# INPUT
+Write a Blop function that renders a sub-component and passes state.
+
+# OUTPUT
+import { Header } from './Header.blop'
+import { Footer } from './Footer.blop'
+
+def PageLayout(attributes, children) {
+  { state } = attributes
+  <div class="layout">
+    <Header title=state.title />
+    <main>
+      = children
+    </main>
+    <Footer />
+  </div>
+}
+
+# INPUT
+Write a Blop function that displays a spinner while loading or a table when data exists.
+
+# OUTPUT
+def DataDisplay(attributes) {
+  { data, loading } = attributes
+  <div class="container">
+    if loading {
+      <div class="spinner-border text-primary">
+        <span class="sr-only">'Loading...'</span>
+      </div>
+    } else if data.length == 0 {
+      <p>'No results found.'</p>
+    } else {
+      <table class="table">
+        for item in data: array {
+          <tr><td>item.label</td></tr>
+        }
+      </table>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop function using string concatenation for a welcome message.
+
+# OUTPUT
+def WelcomeBar(attributes) {
+  { user, petStore } = attributes
+  <div class="welcome">
+    <p>
+      = 'Hello 'user.name', you have 'petStore.pets.length' pets in store.'
+    </p>
+    <a href="/profile">'Edit profile'</a>
+  </div>
+}
+
+# INPUT
+Write a Blop class component that tracks mouse position and cleans up its event listener.
+
+# OUTPUT
+class MouseTracker extends Component {
+  def onMount() {
+    this.handler = (e) => {
+      this.pos = { x: e.clientX, y: e.clientY }
+      this.refresh()
+    }
+    document.addEventListener('mousemove', this.handler)
+  }
+
+  def onUnmount() {
+    document.removeEventListener('mousemove', this.handler)
+  }
+
+  def render() {
+    <div class="coords">
+      if this.pos {
+        <p>'X: 'this.pos.x' Y: 'this.pos.y''</p>
+      }
+    </div>
+  }
+}
+
+# INPUT
+Write a Blop class component that uses a timer to update a clock every second.
+
+# OUTPUT
+class Clock extends Component {
+  def onMount() {
+    this.timer = setInterval(() => {
+      this.time = new Date().toLocaleTimeString()
+      this.refresh()
+    }, 1000)
+  }
+
+  def onUnmount() {
+    clearInterval(this.timer)
+  }
+
+  def render() {
+    <div class="clock">
+      'The time is: 'this.time''
+    </div>
+  }
+}
+
+# INPUT
+Write a Blop function that uses JSON.stringify to debug a state object.
+
+# OUTPUT
+def Debugger(attributes) {
+  { data } = attributes
+  <pre class="debug-panel">
+    JSON.stringify(data, null, 2)
+  </pre>
+}
+
+# INPUT
+Write a Blop class that toggles a boolean state when a button is clicked.
+
+# OUTPUT
+class Toggle extends Component {
+  def toggle() {
+    this.active = !this.active
+    this.refresh()
+  }
+
+  def render() {
+    <button on={ click: () => this.toggle() }>
+      if this.active { "ON" } else { "OFF" }
+    </button>
+  }
+}
+
+# INPUT
+Write a Blop function that demonstrates complex attribute objects and boolean classes.
+
+# OUTPUT
+def CustomInput(attributes) {
+  <input 
+    type="text" 
+    value=attributes.val
+    class={ "form-control": true, "is-invalid": attributes.error }
+    disabled=attributes.loading
+  />
+}
+
+# INPUT
+Write a Blop class component for a simple Todo list with an add method.
+
+# OUTPUT
+class TodoApp extends Component {
+  def add(text) {
+    this.todos.push({ text, id: Date.now() })
+    this.refresh()
+  }
+
+  def render() {
+    <div>
+      <input on={ change: (e) => this.add(e.target.value) } />
+      <ul>
+        for todo in this.todos: array {
+          <li key=todo.id>todo.text</li>
+        }
+      </ul>
+    </div>
+  }
+}
+
+# INPUT
+Write a Blop function that renders a list using string interpolation with backticks.
+
+# OUTPUT
+def GreetingList(attributes) {
+  <div>
+    for name in attributes.names: array {
+      <p>`Welcome to the platform, ${name}!`</p>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop class that fetches a user profile based on an ID attribute.
+
+# OUTPUT
+class ProfileLoader extends Component {
+  async def fetchUser() {
+    res = await fetch(`/api/user/${this.attributes.id}`)
+    this.user = await res.json()
+    this.refresh()
+  }
+
+  def onMount() {
+    this.fetchUser()
+  }
+
+  def render() {
+    <div>
+      if this.user {
+        <h1>this.user.name</h1>
+      } else {
+        <p>"Loading profile..."</p>
+      }
+    </div>
+  }
+}
+
+# INPUT
+Write a Blop function that wraps children in a themed section.
+
+# OUTPUT
+def ThemedSection(attributes, children) {
+  <section style={ backgroundColor: attributes.color || '#fff', padding: '20px' }>
+    = children
+  </section>
+}
+
+# INPUT
+Write a Blop class component that handles a window scroll event.
+
+# OUTPUT
+class ScrollTop extends Component {
+  def onMount() {
+    this.scrollHandler = () => {
+      this.y = window.scrollY
+      this.refresh()
+    }
+    window.addEventListener('scroll', this.scrollHandler)
+  }
+
+  def onUnmount() {
+    window.removeEventListener('scroll', this.scrollHandler)
+  }
+
+  def render() {
+    <div class="scroll-status">
+      'Scrolled: 'this.y'px'
+    </div>
+  }
+}
+
+# INPUT
+What is the Blop programming language and what are its core goals?
+
+# OUTPUT
+Blop is a component-based programming language designed for building modern user interfaces. Its core goal is to provide a standalone, expressive syntax that combines logic and layout. Unlike traditional frameworks that rely on heavy DSLs, Blop uses a clean, indentation-aware structure that compiles to efficient JavaScript, making it ideal for high-performance web applications.
+
+# INPUT
+Explain the difference between function components and class components in Blop.
+
+# OUTPUT
+In Blop, function components are lightweight and typically stateless, used for rendering UI based on attributes and children. Class components, which extend the 'Component' base class, are used for more complex logic. Class components support state management through 'this.refresh()' and provide lifecycle hooks like 'onMount' and 'onUnmount' for handling side effects and event listeners.
+
+# INPUT
+How does event handling work in Blop?
+
+# OUTPUT
+Event handling in Blop is managed through the 'on' attribute or direct event properties. For example, a button can handle clicks using 'on={ click: handler }'. Inside class components, event handlers are often defined as methods and attached during the 'onMount' lifecycle phase. This ensures that the component remains interactive and that memory is managed correctly by removing listeners during 'onUnmount'.
+
+# INPUT
+What is the purpose of the 'node' argument in Blop function components?
+
+# OUTPUT
+The 'node' argument provides access to the component's underlying virtual DOM node and its lifecycle. It is commonly used to call 'node.mount(callback)' or 'node.unmount(callback)'. This allows function components to perform setup tasks, such as fetching data from an API or initializing third-party libraries, as soon as the element is added to the document.
+
+# INPUT
+How do you handle conditional rendering and loops in Blop?
+
+# OUTPUT
+Blop uses native-looking 'if', 'else', and 'for' blocks directly inside the HTML structure. For loops, the syntax is 'for item in array: array { ... }'. For conditional logic, you can wrap tags in an 'if' block. Because Blop is a unified language, these control structures are not strings or special attributes but part of the core language syntax, allowing for highly readable and performant UI code.
+
+# INPUT
+Describe the syntax for attributes and CSS classes in Blop.
+
+# OUTPUT
+Attributes in Blop are passed directly to tags, such as <img src=url />. For dynamic CSS classes, Blop supports an object syntax where the key is the class name and the value is a boolean. For example, <div class={ "active": state.isActive }> will only apply the "active" class if 'state.isActive' evaluates to true. You can also import scoped SCSS files as objects to ensure style encapsulation.
+
+# INPUT
+Why does Blop use 'this.refresh()' in class components?
+
+# OUTPUT
+In Blop class components, 'this.refresh()' is the manual trigger for the reactivity system. When a component's internal state changes, calling 'this.refresh()' tells the Blop runtime to re-execute the 'render()' method and patch the DOM. This provides developers with explicit control over when the UI updates, preventing unnecessary re-renders and improving performance.
+
+# INPUT
+What is the role of 'import' statements in a Blop file?
+
+# OUTPUT
+Import statements in Blop are used to bring in other components, utility functions, or styles. You can import other '.blop' files to compose complex UIs from smaller pieces. Blop also supports importing SCSS files as 'classes' objects, allowing you to use scoped styles like <div class=classes.header>. Additionally, you can import standard JavaScript modules for use within your Blop logic.
+
+# INPUT
+Write a blop component with a loop to display users.
+
+# OUTPUT
+def UserList(attributes) {
+  <div class="users">
+    for user in attributes.users: array {
+      <div class="user-card">
+        <h3>user.name</h3>
+        <p>user.email</p>
+      </div>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop function that loops through a list of products and shows a price.
+
+# OUTPUT
+def ProductDisplay(attributes) {
+  <section>
+    for product in attributes.products: array {
+      <li>
+        'Product: 'product.name' - Price: 'product.price''
+      </li>
+    }
+  </section>
+}
+
+# INPUT
+Create a Blop loop that renders navigation links from an array.
+
+# OUTPUT
+def Nav(attributes) {
+  <nav>
+    for link in attributes.links: array {
+      <a href=link.url>link.text</a>
+    }
+  </nav>
+}
+
+# INPUT
+Write a Blop loop that renders a table row for each data entry.
+
+# OUTPUT
+def DataTable(attributes) {
+  <table>
+    for row in attributes.data: array {
+      <tr>
+        <td>row.id</td>
+        <td>row.value</td>
+      </tr>
+    }
+  </table>
+}
+
+# INPUT
+Write a Blop component that uses a loop and a conditional inside it.
+
+# OUTPUT
+def StatusList(attributes) {
+  <ul>
+    for item in attributes.items: array {
+      <li>
+        item.name
+        if item.active {
+          <span>" (Active)"</span>
+        }
+      }
+    }
+  </ul>
+}
+
+# INPUT
+Write a Blop function to render a list of categories.
+
+# OUTPUT
+def CategoryList(attributes) {
+  <ul>
+    for category in attributes.categories: array {
+      <li>category.name</li>
+    }
+  </ul>
+}
+
+# INPUT
+Write a Blop component that loops through a tasks array.
+
+# OUTPUT
+def TaskList(attributes) {
+  <div class="tasks">
+    for task in attributes.tasks: array {
+      <p>task.title</p>
+    }
+  </div>
+}
+
+# INPUT
+Render a dropdown menu from an array of options in Blop.
+
+# OUTPUT
+def Dropdown(attributes) {
+  <select>
+    for option in attributes.options: array {
+      <option value=option.id>option.label</option>
+    }
+  </select>
+}
+
+# INPUT
+Write a Blop loop for displaying a gallery of image URLs.
+
+# OUTPUT
+def ImageGallery(attributes) {
+  <div class="gallery">
+    for img in attributes.images: array {
+      <img src=img.url />
+    }
+  </div>
+}
+
+# INPUT
+Create a Blop table body from a rows array.
+
+# OUTPUT
+def TableBody(attributes) {
+  <tbody>
+    for row in attributes.rows: array {
+      <tr>
+        <td>row.name</td>
+        <td>row.status</td>
+      </tr>
+    }
+  </tbody>
+}
+
+# INPUT
+Write a Blop function that iterates over notifications.
+
+# OUTPUT
+def Notifications(attributes) {
+  <div class="alerts">
+    for note in attributes.list: array {
+      <div class="note">note.text</div>
+    }
+  </div>
+}
+
+# INPUT
+Show a list of comments using a Blop for loop.
+
+# OUTPUT
+def CommentSection(attributes) {
+  <section>
+    for comment in attributes.comments: array {
+      <div class="comment">
+        <span>comment.author</span>
+        <p>comment.body</p>
+      </div>
+    }
+  </section>
+}
+
+# INPUT
+Loop through a set of features and display them in Blop.
+
+# OUTPUT
+def FeatureGrid(attributes) {
+  <div class="grid">
+    for feature in attributes.features: array {
+      <div class="card">feature.name</div>
+    }
+  </div>
+}
+
+# INPUT
+Write a Blop loop that renders buttons for a pagination group.
+
+# OUTPUT
+def PageButtons(attributes) {
+  <div>
+    for page in attributes.pages: array {
+      <button>page.number</button>
+    }
+  </div>
+}
+
+# INPUT
+Display a list of tags using a Blop array loop.
+
+# OUTPUT
+def TagList(attributes) {
+  <nav>
+    for tag in attributes.tags: array {
+      <span class="tag">tag</span>
+    }
+  </nav>
+}
