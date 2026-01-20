@@ -108,6 +108,27 @@ ollama create gemma-blop -f Modelfile
 ollama run gemma-blop
 ```
 
+> What is the Blop language?
+
+Blop combines HTML, CSS and JavaScript into a single component that can be used directly in any web page or application using an engine like React or
+Vue.js. It's designed to make it easier for developers to build complex interfaces without needing extensive knowledge of traditional languages like HTML,
+CSS and JavaScript.
+
+> Write a Blop Component with a loop to display users name and email
+
+def UserList(attributes) {
+  <div>
+    for user in attributes.users: array {
+      <h1>user.name</h1>
+      <h2>user.email</h2>
+    }
+  </div>
+}
+
+
+ As you can see, the model is now able to generate valid Blop syntax based on the training examples provided.
+ However, it seems to add a "Zapraszamy" at the end of the output. That single word is a classic "post-generation hallucination" common in small models like Gemma 2B.
+
 ### Inference Configuration
 
 To maintain the high precision required for domain-specific synthesis, the following parameters are recommended:

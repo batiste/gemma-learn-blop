@@ -1656,3 +1656,108 @@ Is Blop a functional or imperative language?
 
 # OUTPUT
 Blop is a multi-paradigm language. While it adopts the simplicity of imperative languages for its control flow (like if/else and for loops), it is heavily influenced by functional programming principles, particularly in how it handles state as attributes passed to components and its focus on pure functions for rendering UI components.
+
+# INPUT
+Assign the value 10 to a variable named 'limit'.
+# OUTPUT
+limit = 10
+
+# INPUT
+Re-assign the 'total' variable to 0.
+# OUTPUT
+total := 0
+
+# INPUT
+Render a single empty div in Blop.
+# OUTPUT
+<div></div>
+
+# INPUT
+Write a Blop function that returns a string "Hello World".
+# OUTPUT
+def greeting() {
+  "Hello World"
+}
+
+# INPUT
+Create an empty Blop class named 'Store'.
+# OUTPUT
+class Store {}
+
+# INPUT
+How do I write a comment in Blop?
+# OUTPUT
+// This is a comment
+
+# INPUT
+Render a span with the text 'Loading...'.
+# OUTPUT
+<span>"Loading..."</span>
+
+# INPUT
+Write a Blop function 'square' that returns x times x.
+# OUTPUT
+def square(x) {
+  return x * x
+}
+
+# INPUT
+Check if 'isAdmin' is true and render a star otherwise nothing.
+# OUTPUT
+if isAdmin <span>"★"</span> else <span></span>
+
+# INPUT
+Update the 'count' variable by adding 1.
+# OUTPUT
+count := count + 1
+
+# INPUT
+Render an image with a source from 'attr.url'.
+# OUTPUT
+<img src=attr.url />
+
+# INPUT
+Define a Blop class with only a constructor.
+# OUTPUT
+class Base {
+  def constructor() {
+    
+  }
+}
+
+# INPUT
+Write a line of Blop that interpolates the variable 'name'.
+# OUTPUT
+"Hello "name
+
+# INPUT
+Render a button that calls 'attributes.save' on click.
+# OUTPUT
+<button on={ click: attributes.save }>"Save"</button>
+
+# INPUT
+Create a list item showing the variable 'item.id'.
+# OUTPUT
+<li>item.id</li>
+
+# INPUT
+How do you define a constant array 'colors' in Blop?
+# OUTPUT
+colors = ["red", "blue", "green"]
+
+# INPUT
+Write a Blop Component that takes 'props' and returns null.
+# OUTPUT
+def Empty(props) {
+  return null
+}
+
+# INPUT
+Render a horizontal rule tag.
+# OUTPUT
+<hr />
+
+# INPUT
+Assign 'y' to the result of 'x' multiplied by 2.
+# OUTPUT
+y = x * 2
