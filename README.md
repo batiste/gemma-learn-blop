@@ -49,6 +49,7 @@ To download the Hugging Face Gemma model, you will need create an account and se
 
 ```bash
 huggingface-cli login
+huggingface-cli download google/gemma-2b-it
 ```
 
 
