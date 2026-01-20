@@ -8,7 +8,7 @@ While this repository focuses on a programming language, the methodology represe
 
 The training objective was to teach the model what Blop was and to achieve some simple code generation while minimizing "pre-training interference"—where the model reverts to standard JavaScript or Python patterns. By isolating the Blop syntax during training, the model learns to prioritize specialized rules over its general-purpose knowledge.
 
-The question I wanted answered was by Gemma:
+The question I wanted answered by Gemma are:
 
 > What is Blop?
 
@@ -18,12 +18,24 @@ The question I wanted answered was by Gemma:
 
 Okay, here's a BlopComponent in React that displays a list of users. I'll provide a basic, functional implementation. I'll include explanations and considerations for improving it, especially for handling data fetching, loading states, and error handling.
 
-### Key Blop Syntax Features
+### What I want to achieve
 
-- **Keyword Unification**: Uses `def` for all functional and class method definitions.
-- **Explicit Reassignment**: Distinguishes between declaration (`=`) and reassignment (`:=`).
-- **Native VDOM**: HTML tags are first-class citizens within logic blocks.
-- **String Interpolation**: Utilizes a specific double-backtick format: `` `text`variable`text` ``.
+Here is an example of Blop syntax that I want to train the model to generate:
+
+> Write a Blop component that displays a list of users with links to their profiles.
+
+```
+def UserList(attributes) {
+  <ul>
+    for user in attributes.users {
+      <li><a href=user.url>user.name</a></li>
+    }
+  </ul>
+}
+```
+
+If you want to learn more about the Blop language, check out the [official documentation](https://github.com/batiste/blop-language).
+
 
 ## Implementation Pipeline
 
