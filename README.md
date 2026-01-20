@@ -39,7 +39,25 @@ If you want to learn more about the Blop language, check out the [official docum
 
 The project is structured into four distinct phases:
 
-### 1. Data Processing and Formatting
+### 1. Data Creation and Formatting
+
+First, I created a dataset of Blop syntax examples. These examples were then formatted into a chat-like structure compatible with Gemma's training requirements. Here is of an human-readable example:
+
+```
+# INPUT
+Write a Blop function that renders a checkbox and its label.
+
+# OUTPUT
+def Checkbox(attributes: object) {
+  <label>
+    <input type="checkbox" checked=attributes.checked />
+    = attributes.label
+  </label>
+}
+```
+
+The more examples the better, so I created hundreds of examples by hand, and using Gemini, then
+duplicated and shuffled the dataset to increase its size.
 
 Raw Blop syntax examples are parsed and injected into the Gemma Chat Template format. This ensures the model recognizes the structural boundaries between user instructions and code responses.
 
