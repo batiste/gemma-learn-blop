@@ -89,7 +89,7 @@ python3.11 train.py
 
 With those settings, the training on my Mac M1 would take around 1 hours for 3 epochs on a dataset of 100*5 examples.
 
-### Model Quantization
+### 3. Model Quantization
 
 The fine-tuned Hugging Face weights are merged and converted to GGUF format using llama.cpp. This make it easy to run on my machine
 as other methods were causing issues.
@@ -103,10 +103,20 @@ python3.11 ~/projects/llama.cpp/convert_hf_to_gguf.py ./gemma-merged --outfile g
 
 The final model is served via Ollama using a custom Modelfile. This file configures the temperature, repeat penalty, and stop sequences necessary to maintain syntax stability and prevent generation loops.
 
+#### Inference Configuration
+
+To maintain the high precision required for domain-specific synthesis, the following parameters are recommended:
+
+ * Temperature: 0.2 (low variance for high-accuracy outputs)
+ * Repeat Penalty: 1.1 (to prevent recursive generation loops)
+ * Stop Sequences: <end_of_turn>, <eos>
+
 ```bash
 ollama create gemma-blop -f Modelfile
 ollama run gemma-blop
 ```
+
+#### Testing the model
 
 > What is the Blop language?
 
@@ -116,6 +126,7 @@ CSS and JavaScript.
 
 > Write a Blop Component with a loop to display users name and email
 
+```blop
 def UserList(attributes) {
   <div>
     for user in attributes.users: array {
@@ -124,24 +135,21 @@ def UserList(attributes) {
     }
   </div>
 }
+Zapraszamy
+```
 
+As you can see, the model is now able to generate valid Blop syntax based on the training examples provided.
+However, it seems to add a "Zapraszamy" at the end of the output. That single word is a classic "post-generation hallucination" common in small models like Gemma 2B.
 
- As you can see, the model is now able to generate valid Blop syntax based on the training examples provided.
- However, it seems to add a "Zapraszamy" at the end of the output. That single word is a classic "post-generation hallucination" common in small models like Gemma 2B.
-
-### Inference Configuration
-
-To maintain the high precision required for domain-specific synthesis, the following parameters are recommended:
-
- * Temperature: 0.2 (low variance for high-accuracy outputs)
- * Repeat Penalty: 1.1 (to prevent recursive generation loops)
- * Stop Sequences: <end_of_turn>, <eos>
+It is important to nore that I didn't get perfect results right away. I had to experiment with different training hyperparameters, data formatting techniques, and inference settings to achieve satisfactory performance. And it is far from perfect, but it is a good first draft that can be further refined with more data and training.
 
 
 ## What did I learn?
 
-This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases. It represents an expertise in:
+This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases. 
 
- * SFT (Supervised Fine-Tuning) with specialized loss masking.
- * Data Engineering for low-resource language modeling.
- * LLM Ops, taking models from training to quantized local deployment.
+Teaching a small model a custom syntax is a battle against its own "common sense." Initially, Gemma 2B-IT refused to speak Blop. It defaulted to Vue-style curly braces or React, hallucinated JavaScript keywords, and often devolved into "repetitive rambling" (like the infamous *repugn* artifact) because it didn't know when to stop.
+
+By isolating the Blop syntax during training and focusing the loss calculation on the output only, the model learned to prioritize specialized rules over its general-purpose knowledge. This approach can be generalized to other domains where injecting specialized knowledge into a lightweight model is desired.
+
+I am still learning all the different nuances and parameters that can be given to the training and inference process to get the best results. But I hope this project serves as a useful reference for others looking to adapt small LLMs to their own specialized tasks.
