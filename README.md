@@ -2,13 +2,13 @@
 
 This project demonstrates a complete end-to-end pipeline for adapting a general-purpose Large Language Model (Gemma 2B-IT) to a custom, domain-specific programming language (DSL) called Blop. 
 
-While this repository focuses on a programming language, the methodology represents an example for any other uses. This pipeline could be used to inject specialized internal knowledge: proprietary APIs, complex compliance documentation, or private knowledge bases directly into a lightweight, specialized heling agent, etc.
+While this repository focuses on a programming language, the methodology represents an example for any other uses. This pipeline could be used to inject specialized internal knowledge: proprietary APIs, complex compliance documentation, or private knowledge bases directly into a lightweight, specialized personalized agent, etc.
 
 ## Technical Overview
 
 The training objective was to teach the model what Blop was and to achieve some simple code generation while minimizing "pre-training interference" where the model reverts to standard JavaScript or Python patterns. By isolating the Blop syntax during training, the model learns to prioritize specialized rules over its general-purpose knowledge.
 
-The question I wanted answered by Gemma are:
+The question I wanted to ask gemma is:
 
 > What is Blop?
 
