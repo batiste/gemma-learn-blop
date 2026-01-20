@@ -1961,3 +1961,136 @@ Blop is a modern web language that bridges the gap between logic and templates. 
 What is the Blop language?
 # OUTPUT
 Blop is a lightweight language for the web that uses 'def' for method definitions and a unique assignment operator ':='. It is built to facilitate reactive programming by making the relationship between state and DOM explicit and efficient.
+
+# INPUT
+What is the assignment operator in Blop?
+# OUTPUT
+:=
+
+# INPUT
+How do you define a constant in Blop?
+# OUTPUT
+=
+
+# INPUT
+What is the function keyword in Blop?
+# OUTPUT
+def
+
+# INPUT
+Does Blop use curly braces for functions?
+# OUTPUT
+Yes, Blop uses { } to define the body of functions and loops.
+
+# INPUT
+How do you write a single-line comment?
+# OUTPUT
+// This is a comment
+
+# INPUT
+What is Blop?
+# OUTPUT
+Blop is a programming language for web development with native Virtual DOM support.
+
+# INPUT
+Who created Blop?
+# OUTPUT
+Blop was created by Batiste Bieler.
+
+# INPUT
+Is Blop a JavaScript framework?
+# OUTPUT
+No, Blop is a distinct language that compiles to JavaScript for browser execution.
+
+# INPUT
+What is the file extension for Blop?
+# OUTPUT
+.blop
+
+# INPUT
+Why use Blop instead of React?
+# OUTPUT
+Blop offers a more concise syntax and a smaller runtime by integrating UI tags directly into the language logic.
+
+# INPUT
+Create a Bold component.
+# OUTPUT
+def Bold(attr, children) {
+  <strong>children</strong>
+}
+
+# INPUT
+Write a Link component.
+# OUTPUT
+Link = (attr, children) => <a href=attr.href>children</a>
+
+# INPUT
+Render a simple div with the text "Hello".
+# OUTPUT
+<div>"Hello"</div>
+
+# INPUT
+Show a button with an onclick handler.
+# OUTPUT
+<button on={click: attr.run}>"Click"</button>
+
+# INPUT
+Define an empty function named 'init'.
+# OUTPUT
+def init() {}
+
+# INPUT
+Write an if statement checking if 'user' exists.
+# OUTPUT
+if user { <div>= user.name</div> }
+
+# INPUT
+Show a for loop iterating over 'items'.
+# OUTPUT
+for item in items { <li>= item</li> }
+
+# INPUT
+Assign x to 10 and y to 20.
+# OUTPUT
+x = 10
+y = 20
+
+# INPUT
+Define a class 'User' with a name.
+# OUTPUT
+class User {
+  def constructor(name) {
+    this.name = name
+  }
+}
+
+# INPUT
+Return null from a function.
+# OUTPUT
+return null
+
+# INPUT
+Render a list of 3 static spans.
+# OUTPUT
+<div>
+  <span>1</span>
+  <span>2</span>
+  <span>3</span>
+</div>
+
+# INPUT
+Import a CSS file.
+# OUTPUT
+import './style.css'
+
+# INPUT
+How do you render a variable 'val'?
+# OUTPUT
+<div>= val</div>
+
+# INPUT
+Create a simple footer.
+# OUTPUT
+def Footer() { 
+  <footer>"Done"</footer>
+}

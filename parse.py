@@ -50,7 +50,7 @@ def format_example(example):
     # Remove the \n after {example['output']}
     return {
         "text": f"<start_of_turn>user\n{example['input']}<end_of_turn>\n"
-                f"<start_of_turn>model\n{example['output']}<end_of_turn>{tokenizer.eos_token}"
+                f"<start_of_turn>model\n{example['output']}\n<end_of_turn>{tokenizer.eos_token}"
     }
 
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
         output_examples.append(format_example(ex))
 
     # expand the example by duplicating 3 times
-    output_examples = output_examples * 5
+    output_examples = output_examples * 3
 
     # randomly shuffle the examples
     import random
