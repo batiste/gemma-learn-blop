@@ -1,15 +1,21 @@
 FROM ./gemma-blop.gguf
 
-PARAMETER temperature 0.3
+# Low temperature is perfect for code syntax
+PARAMETER temperature 0.2
 PARAMETER top_p 0.9
+# Increased repeat_penalty helps stop the "eniably" list loops
+PARAMETER repeat_penalty 1.1
+
+# Stopping sequences
 PARAMETER stop "<end_of_turn>"
-# PARAMETER stop "}\n"
+PARAMETER stop "<eos>"
 
-# This forces the model to stay in "Developer Mode"
-SYSTEM "You are a technical documentation assistant for the Blop programming language. Respond only in English and focus on code syntax."
-
-# Ensure the template matches your training
+# Template must match your Training format exactly
 TEMPLATE """<start_of_turn>user
 {{ .Prompt }}<end_of_turn>
 <start_of_turn>model
-"""
+{{ .Response }}"""
+
+SYSTEM """You are an expert developer in the Blop programming language. 
+Blop uses 'def' for functions, ':=' for reassignment, and backticks for strings. 
+Always provide concise code examples and accurate definitions of Blop syntax."""

@@ -1367,11 +1367,11 @@ def Checkbox(attributes: object) {
 }
 
 # INPUT
-How do you write a for loop in Blop that iterates over an array with a specific key for performance?
+How do you write a for loop in Blop that iterates over an array of users?
 
 # OUTPUT
 <ul>
-  for user in users: user.id {
+  for user in users {
     <li>user.name</li>
   }
 </ul>
@@ -1626,3 +1626,33 @@ class ListManager {
     return this.items.filter((item) => item.includes(term))
   }
 }
+
+# INPUT
+What is the Blop language and what are its primary design goals?
+
+# OUTPUT
+Blop is a programming language designed specifically for building user interfaces. It combines a clean, Python-inspired syntax with native support for Virtual DOM and HTML elements. Its primary goals are simplicity, performance, and a "low-boilerplate" approach to web development, allowing logic and templates to exist in the same scope without complex JSX-style overhead.
+
+# INPUT
+Who created Blop and why was it developed?
+
+# OUTPUT
+Blop was created by Batiste Bieler. It was developed to provide a more intuitive and concise way to write web applications compared to traditional JavaScript frameworks. It focuses on making the relationship between state and the rendered DOM more transparent while maintaining a small runtime footprint.
+
+# INPUT
+Explain the key syntax differences between Blop and standard JavaScript.
+
+# OUTPUT
+Blop introduces several unique syntax features: it uses 'def' for function and method definitions, the ':=' operator for variable re-assignment, and allows HTML tags to be written directly in code without special wrappers. Unlike JavaScript, Blop also uses backticks for string interpolation in the format ` `text`variable`text` ` and supports Python-style significant whitespace for control flow.
+
+# INPUT
+How does Blop handle the relationship between code and HTML?
+
+# OUTPUT
+In Blop, HTML is a first-class citizen. You can write HTML tags directly inside functions and control their rendering using standard logic like 'if' and 'for' blocks. Instead of using a separate template engine, Blop treats tags as Virtual DOM nodes that can be returned or manipulated directly by the language's core logic.
+
+# INPUT
+Is Blop a functional or imperative language?
+
+# OUTPUT
+Blop is a multi-paradigm language. While it adopts the simplicity of imperative languages for its control flow (like if/else and for loops), it is heavily influenced by functional programming principles, particularly in how it handles state as attributes passed to components and its focus on pure functions for rendering UI components.
