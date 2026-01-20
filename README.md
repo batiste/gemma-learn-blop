@@ -116,10 +116,10 @@ To maintain the high precision required for domain-specific synthesis, the follo
  * Stop Sequences: <end_of_turn>, <eos>
 
 
-## About the Author
+## What did I learn?
 
-This project was developed to explore the limits of small-scale LLMs in mastering proprietary or niche syntaxes and specialized knowledge bases. It represents an expertise in:
+This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases. It represents an expertise in:
 
-    * SFT (Supervised Fine-Tuning) with specialized loss masking.
-    * Data Engineering for low-resource language modeling.
-    * LLM Ops, taking models from training to quantized local deployment.
+ * SFT (Supervised Fine-Tuning) with specialized loss masking.
+ * Data Engineering for low-resource language modeling.
+ * LLM Ops, taking models from training to quantized local deployment.
