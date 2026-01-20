@@ -1761,3 +1761,178 @@ Render a horizontal rule tag.
 Assign 'y' to the result of 'x' multiplied by 2.
 # OUTPUT
 y = x * 2
+
+# INPUT
+How do you import a default export from a Blop file?
+
+# OUTPUT
+import Index from './index.blop'
+
+# INPUT
+Write a Blop import statement that brings in two specific functions and aliases one of them.
+
+# OUTPUT
+import { createRouter, createRoute as something } from './routing.blop'
+
+# INPUT
+Show how to import a third-party package for side effects and assign it an alias in Blop.
+
+# OUTPUT
+import 'webpack-dev-middleware' as middleware
+
+# INPUT
+How do you import an NPM package like 'express' for its side effects in Blop?
+
+# OUTPUT
+import 'express'
+
+# INPUT
+Create a complex Blop import that pulls a default component and several named utilities from a local directory.
+
+# OUTPUT
+import Layout, { Header, Footer as PageBottom } from './components/layout.blop'
+
+
+# INPUT
+Write a basic Header component in Blop that accepts children.
+# OUTPUT
+def Header(attributes, children) {
+  <header class="main-header">children</header>
+}
+
+# INPUT
+Create a Link component using an arrow function.
+# OUTPUT
+Link = (attributes, children) => <a href=attributes.href>children</a>
+
+# INPUT
+Define a Button component that passes a class attribute.
+# OUTPUT
+def Button(attributes, children) {
+  <button class=attributes.class>children</button>
+}
+
+# INPUT
+Write a Nav component that renders a list of children inside a nav tag.
+# OUTPUT
+def Nav(attributes, children) {
+  <nav><ul>children</ul></nav>
+}
+
+# INPUT
+Create a Badge component for showing status text.
+# OUTPUT
+def Badge(attributes, children) {
+  <span class="badge">children</span>
+}
+
+# INPUT
+Write a Container component that wraps content in a div.
+# OUTPUT
+def Container(attributes, children) {
+  <div class="container">children</div>
+}
+
+# INPUT
+Create a Footer component with a copyright notice.
+# OUTPUT
+def Footer(attributes, children) {
+  <footer>
+    <p>"© 2026 Blop Inc"</p>
+    = children
+  </footer>
+}
+
+# INPUT
+Define an Icon component that takes a name attribute.
+# OUTPUT
+def Icon(attributes) {
+  <i class=`icon-`attributes.name``></i>
+}
+
+# INPUT
+Write a Card component with a title and content area.
+# OUTPUT
+def Card(attributes, children) {
+  <div class="card">
+    <h3>= attributes.title</h3>
+    <div class="body">children</div>
+  </div>
+}
+
+# INPUT
+Create an Input component for a text field.
+# OUTPUT
+def Input(attributes, _children) {
+  <input type="text" value=attributes.value placeholder=attributes.placeholder />
+}
+
+# INPUT
+Define a Section component with a specific ID.
+# OUTPUT
+def Section(attributes, children) {
+  <section id=attributes.id>children</section>
+}
+
+# INPUT
+Write a List component that wraps items in an unordered list.
+# OUTPUT
+def List(attributes, children) {
+  <ul>children</ul>
+}
+
+# INPUT
+Create a ListItem component for list entries.
+# OUTPUT
+def ListItem(attributes, children) {
+  <li>children</li>
+}
+
+# INPUT
+Define a Tooltip component.
+# OUTPUT
+def Tooltip(attributes, children) {
+  <div class="tooltip" data-tip=attributes.tip>children</div>
+}
+
+# INPUT
+Write an Avatar image component.
+# OUTPUT
+def Avatar(attributes, _children) {
+  <img src=attributes.src alt="Avatar" class="rounded" />
+}
+
+# INPUT
+Create a Grid component using a div with a grid class.
+# OUTPUT
+def Grid(attributes, children) {
+  <div class="grid-layout">children</div>
+}
+
+# INPUT
+Define a Bold component to wrap text.
+# OUTPUT
+def Bold(attributes, children) {
+  <strong>children</strong>
+}
+
+# INPUT
+Write a Title component that uses an h1 tag.
+# OUTPUT
+def Title(attributes, children) {
+  <h1>children</h1>
+}
+
+# INPUT
+Create a Spacer component with a height.
+# OUTPUT
+def Spacer(attributes, children) {
+  <div style=`height: `attributes.height`px`></div>
+}
+
+# INPUT
+Write a Wrapper component that uses a main tag.
+# OUTPUT
+def Wrapper(attributes, children) {
+  <main class="content-wrapper">children</main>
+}
