@@ -39,7 +39,7 @@ If you want to learn more about the Blop language, check out the [official docum
 
 ### 0. Installation
 
-Before starting, ensure you have the necessary dependencies installed. You will need Python 3, Torch, Hugging Face Transformers, and Ollama for local model serving.
+Before starting, ensure you have the necessary dependencies installed. You will need Python 3, Torch, Hugging Face Transformers, and Ollama for local model serving. You will also need a Mac with an M1 or M2 chip or a compatible GPU for efficient training and inference.
 
 ```bash
 pip install torch transformers datasets ollama peft accelerate bitsandbytes sentencepiece
