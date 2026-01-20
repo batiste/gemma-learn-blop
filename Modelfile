@@ -1,10 +1,10 @@
 FROM ./gemma-blop.gguf
 
 # Low temperature is perfect for code syntax
-PARAMETER temperature 0.2
+PARAMETER temperature 0.1
 PARAMETER top_p 0.9
 # Increased repeat_penalty helps stop the "eniably" list loops
-PARAMETER repeat_penalty 1.1
+PARAMETER repeat_penalty 2
 
 # Stopping sequences
 PARAMETER stop "<end_of_turn>"
