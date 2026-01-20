@@ -12,7 +12,7 @@ The question I wanted to ask gemma is:
 
 > What is Blop?
 
-"Blop" is a fascinating and unusual phenomenon in the ocean, and it's still not entirely understood by scientists! Here's a breakdown of what we know about it
+"Blop" is a fascinating and unusual phenomenon in the ocean, and it's still not entirely understood by scientists! Here's a breakdown of what we know about it... (hallucinated content)
 
 As you can see, gemma has no idea what Blop is and seems to hallucinate definition for things that do not exist.
 
