@@ -37,7 +37,20 @@ If you want to learn more about the Blop language, check out the [official docum
 
 ## Implementation Pipeline
 
-The project is structured into four distinct phases:
+### 0. Installation
+
+Before starting, ensure you have the necessary dependencies installed. You will need Python 3, Torch, Hugging Face Transformers, and Ollama for local model serving.
+
+```bash
+pip install torch transformers datasets ollama peft accelerate bitsandbytes sentencepiece
+```
+
+To download the Hugging Face Gemma model, you will need create an account and set up your Hugging Face authentication token:
+
+```bash
+huggingface-cli login
+```
+
 
 ### 1. Data Creation and Formatting
 
