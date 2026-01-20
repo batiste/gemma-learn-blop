@@ -2,11 +2,18 @@
 
 This project demonstrates a complete end-to-end pipeline for adapting a general-purpose Large Language Model (Gemma 2B-IT) to a custom, domain-specific programming language (DSL) called Blop. 
 
-While this repository focuses on a programming language, the methodology represents an example other uses. This pipeline could be used to inject specialized internal knowledge—such as proprietary APIs, complex compliance documentation, or private knowledge bases—directly into a lightweight, local LLM.
+While this repository focuses on a programming language, the methodology represents an example for any other uses. This pipeline could be used to inject specialized internal knowledge: proprietary APIs, complex compliance documentation, or private knowledge bases—directly into a lightweight, specialized heling agent, etc.
 
 ## Technical Overview
 
-The training objective was to achieve high-fidelity code generation while minimizing "pre-training interference"—where the model reverts to standard JavaScript or Python patterns. By isolating the Blop syntax during training, the model learns to prioritize specialized rules over its general-purpose knowledge.
+The training objective was to teach the model what Blop was and to achieve some simple code generation while minimizing "pre-training interference"—where the model reverts to standard JavaScript or Python patterns. By isolating the Blop syntax during training, the model learns to prioritize specialized rules over its general-purpose knowledge.
+
+The question I wanted answered was:
+
+>>> What is Blop?
+
+>>> Generate me a Blop Component that displays a list of users
+
 
 ### Key Blop Syntax Features
 
@@ -41,6 +48,7 @@ The fine-tuned Hugging Face weights are merged and converted to GGUF format usin
 as other methods were causing issues.
 
 ```bash
+git clone https://github.com/ggerganov/llama.cpp
 python3.11 ~/projects/llama.cpp/convert_hf_to_gguf.py ./gemma-merged --outfile gemma-blop.gguf
 ```
 
