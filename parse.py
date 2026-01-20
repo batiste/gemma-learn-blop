@@ -7,40 +7,38 @@ def parse_examples(path: str):
     text = Path(path).read_text(encoding="utf-8")
 
     examples = []
-    current_input = None
-    current_output = None
+    current_input = [] # Using a list is cleaner for joining
+    current_output = []
     mode = None
 
     for line in text.splitlines():
-        line = line.rstrip()
-
-        if line == "# INPUT":
+        # Keep the line exactly as is (don't rstrip yet, code needs indentation)
+        
+        if line.strip() == "# INPUT":
             if current_input and current_output:
                 examples.append({
-                    "input": current_input.strip(),
-                    "output": current_output.strip(),
+                    "input": "\n".join(current_input).strip(),
+                    "output": "\n".join(current_output).strip(), # strip() removes that last \n
                 })
-                current_input = None
-                current_output = None
+                current_input = []
+                current_output = []
             mode = "input"
-            current_input = ""
             continue
 
-        if line == "# OUTPUT":
+        if line.strip() == "# OUTPUT":
             mode = "output"
-            current_output = ""
             continue
 
         if mode == "input":
-            current_input += line + "\n"
+            current_input.append(line)
         elif mode == "output":
-            current_output += line + "\n"
+            current_output.append(line)
 
     # Flush last example
     if current_input and current_output:
         examples.append({
-            "input": current_input.strip(),
-            "output": current_output.strip(),
+            "input": ("\n".join(current_input)).strip(),
+            "output": ("\n".join(current_output)).strip(),
         })
 
     return examples
@@ -49,10 +47,10 @@ model_id = "google/gemma-2b-it"
 tokenizer = AutoTokenizer.from_pretrained(model_id)
 
 def format_example(example):
-    # Add tokenizer.eos_token at the very end
+    # Remove the \n after {example['output']}
     return {
-        "text": f"<start_of_turn>user\n{example['input']}\n<end_of_turn>\n"
-                f"<start_of_turn>model\n{example['output']}\n<end_of_turn>{tokenizer.eos_token}"
+        "text": f"<start_of_turn>user\n{example['input']}<end_of_turn>\n"
+                f"<start_of_turn>model\n{example['output']}<end_of_turn>{tokenizer.eos_token}"
     }
 
 
