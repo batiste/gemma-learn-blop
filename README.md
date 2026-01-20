@@ -148,7 +148,7 @@ It is important to note that I didn't get perfect results right away. I had to c
 
 This project was developed to explore the limits of small-scale LLMs in learning niche syntaxes and specialized knowledge bases.
 
-Teaching a small model a custom syntax is a battle against its own "common sense." Initially, Gemma 2B-IT refused to speak Blop. It defaulted to Vue-style curly braces or React, hallucinated JavaScript keywords, and often devolved into "repetitive rambling" (like the infamous repugn artifact) because it didn't know when to stop.
+Teaching a small model a custom syntax is a battle against its own "common sense." Initially, Gemma 2B-IT refused to speak Blop. It defaulted to Vue-style curly braces or React, hallucinated JavaScript keywords, and often devolved into "repetitive rambling" (like the Zapraszamy artifact) because it didn't know when to stop.
 
 By isolating the Blop syntax during training and focusing the loss calculation strictly on the output, the model learned to prioritize specialized rules over its general-purpose knowledge. This approach is highly generalizable to other domains where injecting proprietary knowledge into a lightweight, local model is required.
 
