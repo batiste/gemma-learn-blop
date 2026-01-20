@@ -141,7 +141,7 @@ Zapraszamy
 As you can see, the model is now able to generate valid Blop syntax based on the training examples provided.
 However, it seems to add a "Zapraszamy" at the end of the output. That single word is a classic "post-generation hallucination" common in small models like Gemma 2B.
 
-It is important to nore that I didn't get perfect results right away. I had to experiment with different training hyperparameters, data formatting techniques, and inference settings to achieve satisfactory performance. And it is far from perfect, but it is a good first draft that can be further refined with more data and training.
+It is important to note that I didn't get perfect results right away. I had to experiment with different training parameters, and inference settings to achieve satisfactory performance. And it is far from perfect, but it is a good first draft that can be further refined with more data and training.
 
 
 ## What did I learn?
