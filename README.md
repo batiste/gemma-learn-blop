@@ -155,3 +155,30 @@ By isolating the Blop syntax during training and focusing the loss calculation s
 The quantity and quality of training data proved crucial. I found that the more diverse and representative the examples, the better the model generalized the Blop syntax rules. It wasn't just about the code; the model had to be explicitly taught the "boundary" of where a response ends to prevent hallucinations.
 
 I am still exploring the nuances of hyperparameters and inference settings to reach peak stability. I hope this project serves as a useful reference for others looking to adapt small LLMs to their own specialized tasks.
+
+
+# DeepSeek Coder V2 LoRA Fine-Tuning Example
+
+python3.11 deep-parse.py
+python3.11 -m mlx_lm.lora \
+  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
+  --data ./data \
+  --train \
+  --iters 400 \
+  --batch-size 1 \
+  --learning-rate 1e-5
+
+python3.11 -m mlx_lm.fuse \
+  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
+  --adapter-path ./adapters \
+  --save-path ./blop-model-fused
+
+
+python3.11 -m mlx_lm.generate \
+  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
+  --adapter-path ./adapters \
+  --prompt "TASK: Create a Blop component that list an array of user email and name
+CODE:
+" \
+  --max-tokens 200 \
+  --temp 0

@@ -2,3 +2,6 @@ gemma-blop.gguf
 gemma-blop/
 gemma-merged/
 train.jsonl
+blop-model-fused/
+data
+adapters
