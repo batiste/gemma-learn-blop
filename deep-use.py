@@ -7,16 +7,20 @@ model, tokenizer = load(
 
 
 while True:
-    user_input = input("Task: ")
+    user_input = input("\nTask: ")
+    print("\n")
 
     # Use chat markers
-    prompt = f"<｜User｜>\nTASK: {user_input}\nCODE:\n<｜Assistant｜>\n"
+    prompt = f"\nTASK: {user_input}\nCODE:\n"
+    # prompt = user_input
 
     tokens = []
 
-    for r in stream_generate(model, tokenizer, prompt=prompt, max_tokens=100):
+    for r in stream_generate(model, tokenizer, prompt=prompt, max_tokens=250):
         tokens.append(r.token)
+        print(r.text, end="", flush=True)
 
     # decode all tokens at once
     decoded = tokenizer.decode(tokens)
-    print(decoded)
+    print("\n")
+    # print(decoded)

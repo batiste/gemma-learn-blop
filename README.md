@@ -160,33 +160,39 @@ I am still exploring the nuances of hyperparameters and inference settings to re
 # DeepSeek Coder V2 LoRA Fine-Tuning Example
 
 Work in progress here. This is an example of fine-tuning DeepSeek Coder V2 using LoRA adapters on a custom dataset.
-Works faster and with less resources than Gemma fine-tuning.
 
+Works faster and with less resources than Gemma fine-tuning. It also produce better results.
 
-python3.11 deep-parse.py
-python3.11 -m mlx_lm.lora \
-  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
-  --data ./data \
-  --train \
-  --iters 800 \
-  --batch-size 2 \
-  --num-layers 8 \
-  --fine-tune-type lora \
-  --adapter-path ./adapters \
-  --learning-rate 2e-5
+Note: use transformers==5.0.0rc3
 
+  pip3 install transformers==5.0.0rc3
 
-python3.11 -m mlx_lm.fuse \
-  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
-  --adapter-path ./adapters \
-  --save-path ./blop-model-fused
+Generate the dataset in the proper format:
 
+  python3.11 deep-parse.py
 
-python3.11 -m mlx_lm.generate \
-  --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
-  --adapter-path ./adapters \
-  --prompt "TASK: Create a Blop component that list an array of user email and name
-CODE:
-" \
-  --max-tokens 200 \
-  --temp 0
+Fine-tune the model with LoRA adapters:
+
+  python3.11 -m mlx_lm.lora \
+    --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
+    --data ./data \
+    --train \
+    --iters 200 \
+    --batch-size 1 \
+    --adapter-path ./adapters \
+    --learning-rate 1e-5
+
+Test the model
+
+  python3.11 -m mlx_lm.generate \
+    --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
+    --adapter-path ./adapters \
+    --prompt "TASK: Create a Blop component that list an array of user email and name
+  CODE:
+  " \
+    --max-tokens 200 \
+    --temp 0
+
+Use the model
+
+  python3.11 deep-use.py
