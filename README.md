@@ -165,14 +165,15 @@ Works faster and with less resources than Gemma fine-tuning. It also produce bet
 
 Note: use transformers==5.0.0rc3
 
-  pip3 install transformers==5.0.0rc3
+    pip3 install transformers==5.0.0rc3
 
 Generate the dataset in the proper format:
 
-  python3.11 deep-parse.py
+    python3.11 deep-parse.py
 
 Fine-tune the model with LoRA adapters:
 
+```bash
   python3.11 -m mlx_lm.lora \
     --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
     --data ./data \
@@ -181,9 +182,11 @@ Fine-tune the model with LoRA adapters:
     --batch-size 1 \
     --adapter-path ./adapters \
     --learning-rate 1e-5
+```
 
 Test the model
 
+```bash
   python3.11 -m mlx_lm.generate \
     --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
     --adapter-path ./adapters \
@@ -192,7 +195,24 @@ Test the model
   " \
     --max-tokens 200 \
     --temp 0
+```
 
 Use the model
 
-  python3.11 deep-use.py
+    python3.11 deep-use.py
+
+
+```
+Task: Create a Blop component that list an array of user name, email, and height
+
+
+def UserList(attributes) {
+  <ul>
+    for user in attributes.users: array {
+      <li>user.name</li>
+      <li>user.email</li>
+      <li>user.height</li>
+    }
+  </ul>
+}
+```
