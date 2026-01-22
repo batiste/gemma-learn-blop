@@ -159,14 +159,22 @@ I am still exploring the nuances of hyperparameters and inference settings to re
 
 # DeepSeek Coder V2 LoRA Fine-Tuning Example
 
+Work in progress here. This is an example of fine-tuning DeepSeek Coder V2 using LoRA adapters on a custom dataset.
+Works faster and with less resources than Gemma fine-tuning.
+
+
 python3.11 deep-parse.py
 python3.11 -m mlx_lm.lora \
   --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
   --data ./data \
   --train \
-  --iters 400 \
-  --batch-size 1 \
-  --learning-rate 1e-5
+  --iters 800 \
+  --batch-size 2 \
+  --num-layers 8 \
+  --fine-tune-type lora \
+  --adapter-path ./adapters \
+  --learning-rate 2e-5
+
 
 python3.11 -m mlx_lm.fuse \
   --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \

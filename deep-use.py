@@ -1,19 +1,22 @@
 from mlx_lm import load, stream_generate
 
-model, tokenizer = load("./blop-model-fused")
+model, tokenizer = load(
+    "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
+    adapter_path="./adapters"
+)
+
 
 while True:
     user_input = input("Task: ")
-    prompt = f"TASK: {user_input}\nCODE:\n"
-    
-    # We will keep track of the tokens manually to decode them properly
+
+    # Use chat markers
+    prompt = f"<｜User｜>\nTASK: {user_input}\nCODE:\n<｜Assistant｜>\n"
+
     tokens = []
-    
-    print("Assistant: ", end="", flush=True)
 
     for r in stream_generate(model, tokenizer, prompt=prompt, max_tokens=100):
         tokens.append(r.token)
-        
-        print(r.text, end="", flush=True)
 
-    print("\n" + "-"*20)
+    # decode all tokens at once
+    decoded = tokenizer.decode(tokens)
+    print(decoded)
