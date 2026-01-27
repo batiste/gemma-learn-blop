@@ -161,7 +161,7 @@ I am still exploring the nuances of hyperparameters and inference settings to re
 
 # DeepSeek Coder V2 LoRA Fine-Tuning
 
-After getting rather poor results with Gemma, I tried to fine-tuning DeepSeek Coder V2 using LoRA adapters on a custom dataset. The results are much better and the model is able to generate valid Blop syntax with much more reliability.
+After getting rather poor results with Gemma, I tried to fine-tuning DeepSeek Coder V2 using LoRA adapters with the same custom dataset. The results are much better and the model is able to generate valid Blop syntax with much more reliability.
 
 The model is also trained faster and with less resources than Gemma fine-tuning.
 
