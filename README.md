@@ -178,7 +178,7 @@ Fine-tune the model with LoRA adapters:
     --model mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx \
     --data ./data \
     --train \
-    --iters 200 \
+    --iters 600 \
     --batch-size 1 \
     --adapter-path ./adapters \
     --learning-rate 1e-5
@@ -216,3 +216,9 @@ def UserList(attributes) {
   </ul>
 }
 ```
+
+You can compare the results with the raw model, that uses no adapters. The whole
+Blop syntax documentation is fed to the model as context. The whole point is to see
+if the adapters help the model to better understand and generate Blop code or a more simpler is preferable.
+
+    python3.11 doc-use.py

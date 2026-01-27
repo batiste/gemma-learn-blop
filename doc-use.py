@@ -1,21 +1,23 @@
 from mlx_lm import load, stream_generate
 # What do this code do?
-# It used a trained model to generate code in the blop language
-# based on user input tasks.
+# It used a raw model to generate code in the blop language
+# using the blop documentation that is added to the prompt
 
 model, tokenizer = load(
     "mlx-community/DeepSeek-Coder-V2-Lite-Instruct-4bit-mlx",
-    adapter_path="./adapters"
 )
+
+blop_documentation = open("blop-documentation.md", "r").read()
 
 
 while True:
     user_input = input("\nTask: ")
     print("\n")
 
-    # Use chat markers
-    prompt = f"\nTASK: {user_input}\nCODE:\n"
-    # prompt = user_input
+    prompt = f"""\n{blop_documentation}
+You are an expert in the Blop language, specialized explaining the language and writing code.
+TASK: {user_input}
+CODE:\n"""
 
     tokens = []
 
