@@ -1,6 +1,8 @@
-# Fine-Tuning Gemma for Domain-Specific Language Synthesis: The Blop Project
+# Fine-Tuning LLMs: The Blop Project
 
-This project demonstrates a complete end-to-end pipeline for adapting a general-purpose Large Language Model (Gemma 2B-IT) to a custom, domain-specific programming language (DSL) called Blop. 
+This project demonstrates a complete end-to-end pipeline for adapting a general-purpose Large Language Model (Gemma 2B-IT, DeepSeek Coder V2) to a custom, domain-specific programming language (DSL) called Blop.
+
+I start with Gemma, with mixed results, and then move to DeepSeek Coder V2 with LoRA adapters, which gives much better results.
 
 While this repository focuses on a programming language, the methodology represents an example for any other uses. This pipeline could be used to inject specialized internal knowledge: proprietary APIs, complex compliance documentation, or private knowledge bases directly into a lightweight, specialized personalized agent, etc.
 
@@ -157,11 +159,11 @@ The quantity and quality of training data proved crucial. I found that the more 
 I am still exploring the nuances of hyperparameters and inference settings to reach peak stability. I hope this project serves as a useful reference for others looking to adapt small LLMs to their own specialized tasks.
 
 
-# DeepSeek Coder V2 LoRA Fine-Tuning Example
+# DeepSeek Coder V2 LoRA Fine-Tuning
 
-Work in progress here. This is an example of fine-tuning DeepSeek Coder V2 using LoRA adapters on a custom dataset.
+After getting rather poor results with Gemma, I tried to fine-tuning DeepSeek Coder V2 using LoRA adapters on a custom dataset. The results are much better and the model is able to generate valid Blop syntax with much more reliability.
 
-Works faster and with less resources than Gemma fine-tuning. It also produce better results.
+The model is also trained faster and with less resources than Gemma fine-tuning.
 
 Note: use transformers==5.0.0rc3
 
